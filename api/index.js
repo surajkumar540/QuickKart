@@ -1,17 +1,19 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-const port = 8000;
+const port = process.env.PORT || 8000;
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb+srv://surajgautam56878:surajgautam56878@cluster0.rot4qnp.mongodb.net/QuickKart")
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("✅ Connected to MongoDB");
   })
